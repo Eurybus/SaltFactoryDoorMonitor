@@ -2,17 +2,104 @@
 <head>
     <title>Door client</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+    // Create a client instance
+    client = new Paho.MQTT.Client("m23.cloudmqtt.com", 36730, "web_60");
+
+    // set callback handlers
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+    var options = {
+      useSSL: true,
+      userName: "pwrspiob",
+      password: "mzH6meKV0hcg",
+      onSuccess:onConnect,
+      onFailure:doFail
+    }
+
+    // connect the client
+    client.connect(options);
+
+    // called when the client connects
+    function onConnect() {
+      // Once a connection has been made, make a subscription and send a message.
+      console.log("onConnect");
+      client.subscribe("/open/door_01");
+      client.subscribe("/open/door_02");
+      client.subscribe("/close/door_01");
+      client.subscribe("/close/door_02");
+      client.subscribe("/elevator");
+
+    }
+
+    function doFail(e){
+      console.log(e);
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:"+responseObject.errorMessage);
+      }
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+      console.log("onMessageArrived:"+message.payloadString);
+      if(message.destinationName.indexOf("door") !== -1){
+          lightButton(message.destinationName)
+      }
+      else if(message.destinationName.indexOf("elevator") !== -1){
+          elevatorNotify()
+      }
+    }
+
+    function lightButton(topic){
+        switch (topic){
+            case "/open/door_01":
+                $('#door1_status').removeClass('door_status_closed');
+                $('#door1_status').addClass('door_status_open');
+                break;
+            case "/open/door_02":
+                $('#door2_status').removeClass('door_status_closed');
+                $('#door2_status').addClass('door_status_open');
+                break;
+            case "/close/door_02":
+                $('#door2_status').removeClass('door_status_open');
+                $('#door2_status').addClass('door_status_closed');
+                break;
+            case "/close/door_01":
+                $('#door1_status').removeClass('door_status_open');
+                $('#door1_status').addClass('door_status_closed');
+                break;
+        }
+    }
+
+    function elevatorNotify(){
+        $('#elevator_status').removeClass('elevator_status_gone');
+        $('#elevator_status').addClass('elevator_status_arrived');
+    }
+  </script>
 </head>
 
 <div id=page>
   <p>Door Status</p>
     <div id="monitor_frame">
         <div id="monitor_interior">
-            <div class="door_status">
+            <div class="door_status" id="door1_status">
                 <p>Door 1</p>
             </div>
-            <div class="door_status">
+            <div class="door_status" id="door2_status">
                 <p>Door 2</p>
+            </div>
+            <div class="elevator_status" id="elevator_status">
+                <p>Elevator</p>
             </div>
         </div>
     </div>

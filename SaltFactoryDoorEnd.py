@@ -1,6 +1,4 @@
 from flask import Flask, render_template
-from MqClient import DoorClient as Dclient
-
 
 app = Flask(__name__)
 
@@ -12,4 +10,3 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run()
-    client = Dclient()

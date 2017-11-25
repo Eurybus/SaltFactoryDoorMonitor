@@ -19,12 +19,32 @@
 }
 .door_status {
     margin: auto;
-    background-color: red;
+    background-color: yellow;
     width: 25%;
     height: auto;
     border-radius: 15px;
 
 }
+.door_status_open{
+    background-color: green;
+}
+.door_status_closed{
+    background-color: red;
+}
 .door_status, p{
     font-size: 28px;
+}
+
+.elevator_status {
+    margin: auto;
+    background-color: yellow;
+    width: 25%;
+    height: auto;
+    border-radius: 15px;
+}
+.elevator_status_arrived {
+    background-color: green;
+}
+.elevator_status_gone {
+    background-color: red;
 }
