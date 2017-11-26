@@ -48,6 +48,8 @@
     width: 60%;
     height: auto;
     border-radius: 15px;
+    color: green;
+    font-weight: bold;
 }
 .elevator_status_arrived {
     background-color: green;
