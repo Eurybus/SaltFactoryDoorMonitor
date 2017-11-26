@@ -18,7 +18,7 @@ def main():
         try:
             print(
                 """
-                FlowPro PlanB:
+                FlowPro onStage:
                 1. Door_01 OK
                 2. Door_02 Unauthorized
                 3. Door_02 OK
