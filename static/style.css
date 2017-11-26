@@ -36,15 +36,15 @@
 }
 
 .elevator_status {
+    visibility: hidden;
     margin: auto;
-    background-color: yellow;
-    width: 25%;
+    width: 30%;
     height: auto;
     border-radius: 15px;
 }
 .elevator_status_arrived {
     background-color: green;
 }
-.elevator_status_gone {
-    background-color: red;
+.elevator_status_requested {
+    visibility: visible;
 }

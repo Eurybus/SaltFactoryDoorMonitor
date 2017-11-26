@@ -61,29 +61,33 @@
     }
 
     function lightButton(topic){
+        var door1 = $('#door1_status');
+        var door2 = $('#door2_status');
+
         switch (topic){
             case "/open/door_01":
-                $('#door1_status').removeClass('door_status_closed');
-                $('#door1_status').addClass('door_status_open');
+                door1.addClass('door_status_open');
+                setTimeout(function(){door1.removeClass('door_status_open')}, 3000);
                 break;
             case "/open/door_02":
-                $('#door2_status').removeClass('door_status_closed');
-                $('#door2_status').addClass('door_status_open');
+                door2.addClass('door_status_open');
+                setTimeout(function(){door2.removeClass('door_status_open')}, 3000);
                 break;
             case "/close/door_02":
-                $('#door2_status').removeClass('door_status_open');
-                $('#door2_status').addClass('door_status_closed');
+                door2.addClass('door_status_closed');
+                setTimeout(function(){door2.removeClass('door_status_closed')}, 3000);
                 break;
             case "/close/door_01":
-                $('#door1_status').removeClass('door_status_open');
-                $('#door1_status').addClass('door_status_closed');
+                door1.addClass('door_status_closed');
+                setTimeout(function(){door1.removeClass('door_status_closed')}, 3000);
                 break;
         }
     }
 
     function elevatorNotify(){
-        $('#elevator_status').removeClass('elevator_status_gone');
-        $('#elevator_status').addClass('elevator_status_arrived');
+        var elev = $('#elevator_status');
+        elev.addClass('elevator_status_requested');
+        setTimeout(function(){elev.removeClass('elevator_status_requested')}, 3000);
     }
   </script>
 </head>
@@ -99,7 +103,7 @@
                 <p>Door 2</p>
             </div>
             <div class="elevator_status" id="elevator_status">
-                <p>Elevator</p>
+                <p>Elevator requested</p>
             </div>
         </div>
     </div>
