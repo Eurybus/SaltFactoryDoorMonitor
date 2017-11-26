@@ -67,19 +67,19 @@
         switch (topic){
             case "/open/door_01":
                 door1.addClass('door_status_open');
-                setTimeout(function(){door1.removeClass('door_status_open')}, 3000);
+                setTimeout(function(){door1.removeClass('door_status_open')}, 10000);
                 break;
             case "/open/door_02":
                 door2.addClass('door_status_open');
-                setTimeout(function(){door2.removeClass('door_status_open')}, 3000);
+                setTimeout(function(){door2.removeClass('door_status_open')}, 10000);
                 break;
             case "/close/door_02":
                 door2.addClass('door_status_closed');
-                setTimeout(function(){door2.removeClass('door_status_closed')}, 3000);
+                setTimeout(function(){door2.removeClass('door_status_closed')}, 10000);
                 break;
             case "/close/door_01":
                 door1.addClass('door_status_closed');
-                setTimeout(function(){door1.removeClass('door_status_closed')}, 3000);
+                setTimeout(function(){door1.removeClass('door_status_closed')}, 10000);
                 break;
         }
     }
@@ -87,7 +87,7 @@
     function elevatorNotify(){
         var elev = $('#elevator_status');
         elev.addClass('elevator_status_requested');
-        setTimeout(function(){elev.removeClass('elevator_status_requested')}, 3000);
+        setTimeout(function(){elev.removeClass('elevator_status_requested')}, 10000);
     }
   </script>
 </head>
