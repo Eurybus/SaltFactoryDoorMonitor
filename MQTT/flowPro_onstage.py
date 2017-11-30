@@ -24,6 +24,7 @@ def main():
                 3. Door_02 OK
                 4. Door_02 Unauthorized
                 5. Elevator request
+                9. Login
                 0. Exit
                 """
             )
@@ -39,6 +40,8 @@ def main():
                 client.publish('/close/door_02', '{"door_02": False}')
             elif user_input == 5:
                 client.publish('/elevator', '{"elevator": True}')
+            elif user_input == 9:
+                client.publish('/login', '{"login": True}')
             elif user_input == 0:
                 raise SystemExit
             else:
